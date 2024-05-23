@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.InicioSesionController">
+   <children>
+      <PasswordField fx:id="userPass" layoutX="66.0" layoutY="164.0" promptText="Contraseña" />
+      <TextField fx:id="userName" layoutX="66.0" layoutY="113.0" promptText="Nombre Usuario" />
+      <Label layoutX="120.0" layoutY="38.0" prefHeight="47.0" prefWidth="260.0" text="Gran hotel EL USERO ">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Button fx:id="repPass" layoutX="66.0" layoutY="261.0" mnemonicParsing="false" text="He olvidado mi contraseña" />
+      <Button fx:id="exitInicio" layoutX="442.0" layoutY="346.0" mnemonicParsing="false" text="Salir" />
+      <ImageView fitHeight="204.0" fitWidth="169.0" layoutX="292.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../java/IMG/logo%20hotel.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="helpInicio" layoutX="41.0" layoutY="346.0" mnemonicParsing="false" text="Ayuda" />
+      <Button fx:id="btiniciarSesion" layoutX="175.0" layoutY="226.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar" />
+      <Button fx:id="btcrearCuenta" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crera cuentra" />
+      <CheckBox fx:id="mostrarPass" layoutX="66.0" layoutY="200.0" mnemonicParsing="false" text="Mostar Contraseña" />
+   </children>
+</AnchorPane>
