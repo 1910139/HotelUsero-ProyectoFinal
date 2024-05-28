@@ -12,7 +12,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.InicioSesionController">
    <children>
-      <PasswordField fx:id="userPass" layoutX="66.0" layoutY="164.0" promptText="Contraseña" />
       <TextField fx:id="userName" layoutX="66.0" layoutY="113.0" promptText="Nombre Usuario" />
       <Label layoutX="120.0" layoutY="38.0" prefHeight="47.0" prefWidth="260.0" text="Gran hotel EL USERO ">
          <font>
@@ -28,8 +27,10 @@
       </ImageView>
       <Button fx:id="helpInicio" layoutX="41.0" layoutY="346.0" mnemonicParsing="false" text="Ayuda" />
       <Button fx:id="btiniciarSesion" layoutX="175.0" layoutY="226.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar" />
-      <Button fx:id="btcrearCuenta" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#crearCuentaNueva" text="Crera cuentra" />
+      <Button fx:id="btcrearCuentaN" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#crearCuentaN" text="Crera cuentra" />
       <CheckBox fx:id="mostrarPass" layoutX="66.0" layoutY="200.0" mnemonicParsing="false" text="Mostar Contraseña" />
       <TextField fx:id="avisos" layoutX="66.0" layoutY="304.0" prefHeight="25.0" prefWidth="397.0" promptText="avisos" />
+      <TextField fx:id="campoTemporal" layoutX="66.0" layoutY="164.0" />
+      <PasswordField fx:id="userPass" layoutX="66.0" layoutY="164.0" promptText="Contraseña" />
    </children>
 </AnchorPane>

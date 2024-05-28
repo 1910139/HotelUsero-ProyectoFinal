@@ -32,3 +32,63 @@ public class DatabaseConnection
         return connection;
     }
 }
+
+/* 
+CREATE TABLE Administrador (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    pass VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Persona (
+    id INT AUTO_INCREMENT NOT NULL,
+    user VARCHAR(20),
+    pass VARCHAR(20) NOT NULL,
+    nif VARCHAR(9) NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellidos VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    tlf VARCHAR(15) NOT NULL,
+    sexo VARCHAR(15),
+    rol VARCHAR(20) NOT NULL DEFAULT 'cliente',
+    PRIMARY KEY (id),
+    UNIQUE (user)
+);
+
+
+CREATE TABLE Cliente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nivel_cliente INT NOT NULL,
+    descuento FLOAT NOT NULL,
+    FOREIGN KEY (id) REFERENCES Persona(id)
+);
+
+CREATE TABLE Empleado (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    rol VARCHAR(50) NOT NULL,
+    FOREIGN KEY (id) REFERENCES Persona(id)
+);
+
+
+CREATE TABLE Habitacion (
+    cod_habitacion INT AUTO_INCREMENT PRIMARY KEY,
+    num_habitacion INT NOT NULL,
+    planta_habitacion INT NOT NULL,
+    tipo_habitacion INT NOT NULL,
+    ocupada_hab BOOLEAN NOT NULL,
+    inicio_ocupacion DATE,
+    fin_ocupacion DATE
+);
+
+
+INSERT INTO Administrador (nombre, apellidos, email, pass) VALUES
+('Admin', 'ad', 'admin1@example.com', '1234'),
+('FranciscoAd', 'Apellido2', 'admin2@example.com', 'qwerty');
+
+INSERT INTO Persona (user, pass, nif, nombre, apellidos, email, tlf, sexo)
+VALUES ('francisco', 'qwerty', '25568423B', 'Francisco', 'Fernandez Fernandez', 'francisco@example.com', '123456789', 0);
+INSERT INTO Cliente (id, nivel_cliente, descuento)
+VALUES (LAST_INSERT_ID(), 100, 50);
+*/

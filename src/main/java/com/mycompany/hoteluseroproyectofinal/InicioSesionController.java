@@ -37,7 +37,7 @@ public class InicioSesionController implements Initializable
     @FXML
     private CheckBox mostrarPass;
     @FXML           //menu para crear cuenta
-    private Button btcrearCuenta;
+    private Button btcrearCuentaN;
     @FXML           //Inicia sesion
     private Button btiniciarSesion;
     @FXML           //ayuda
@@ -53,12 +53,25 @@ public class InicioSesionController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        // TODO
+/******************************************************************************/    //arreglar
+        // Mostrar contraseñas
+        mostrarPass.setOnAction(event -> 
+        {
+            // Cambiar la visibilidad del campo de texto
+            userPass.setVisible(mostrarPass.isSelected());
+
+            // Si la caja esta encendida se muestran las contraseñas
+            if (mostrarPass.isSelected()) 
+            {
+                userPass.setText(userPass.getText());
+            }
+        });
+/******************************************************************************/
     }
 
     
     
-/*******************************************************************************/
+/******************************************************************************/
         //Inicio de sesion prueba base de datos
     @FXML
     private void iniciarSesion(ActionEvent event) throws IOException 
@@ -78,36 +91,28 @@ public class InicioSesionController implements Initializable
             System.out.println("Credenciales incorrectas");
         }
     }
-/*******************************************************************************/    
+    
+    
+/******************************************************************************/    
     @FXML
-    private void crearCuentaNueva(ActionEvent event) throws IOException
+    private void crearCuentaN(ActionEvent event) throws IOException 
     {
- 
-//     FXMLLoader fxmlloader=new FXMLLoader(App.class.getResource("CreacionCuenta.fxml"));
-//     Scene scene=new Scene(fxmlloader.load());  
-//     
-//     Stage stage=new Stage();  
-//     stage.setScene(scene);
-//    
-//     //Inhabilitar la ventana actual
-//     stage.initModality(Modality.APPLICATION_MODAL);
-//     stage.show();    
-     
-     App.cargarVentana("crearCuenta");
-     Stage ventana = (Stage) this.btcrearCuenta.getScene().getWindow(); //cerrar ventana 
-     ventana.close();
+    App.cargarVentana("crearCuenta");
+    Stage ventana = (Stage) this.btcrearCuentaN.getScene().getWindow(); //cerrar ventana 
+    ventana.close();
+    }
 
-    }  
-/*******************************************************************************/       
+    
+/******************************************************************************/       
     //hace una consulta en la base de datos para enviarsela al if de comprobar usuario
     private boolean validarCredenciales(String user, String pass) 
     {
-        String query = "SELECT * FROM persona WHERE user = ? AND Pass = ?";
+//      String query = "SELECT * FROM users WHERE username = '" + user + "' AND password = '" + pass + "'";
+        String query = "SELECT * FROM persona WHERE user = ? AND pass = ?";
         
         
-        //defensa anti SQL Inyection  "or'1'='1
-        try (Connection connection = DatabaseConnection.getConnection();
-                
+        //defensa anti SQL Inyection  "or'1'='1"
+        try (Connection connection = DatabaseConnection.getConnection();  
              PreparedStatement preparedStatement = connection.prepareStatement(query)) 
         {
             preparedStatement.setString(1, user);
@@ -121,9 +126,7 @@ public class InicioSesionController implements Initializable
         }
         return false;
     }
-/******************************************************************************/  
-
-         
+/******************************************************************************/         
 }
 
 
