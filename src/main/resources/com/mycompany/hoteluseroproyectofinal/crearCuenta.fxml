@@ -24,7 +24,7 @@
             <Image url="@../../../../../../../ProyectoHotel/src/main/java/IMG/logo%20hotel.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="exitC" layoutX="547.0" layoutY="361.0" mnemonicParsing="false" text="Salir" />
+      <Button fx:id="exitC" layoutX="547.0" layoutY="361.0" mnemonicParsing="false" onAction="#actionSalir" text="Salir" />
       <Button fx:id="helpCreacioC" layoutX="478.0" layoutY="361.0" mnemonicParsing="false" text="Ayuda" />
       <TextField fx:id="cNombreUser" layoutX="254.0" layoutY="67.0" promptText="Nombre" />
       <TextField fx:id="cApellidosUser" layoutX="254.0" layoutY="103.0" promptText="Apellidos" />

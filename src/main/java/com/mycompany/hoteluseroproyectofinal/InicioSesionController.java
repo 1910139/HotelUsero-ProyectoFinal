@@ -109,8 +109,6 @@ public class InicioSesionController implements Initializable
     private void actionSalir(ActionEvent event) throws IOException 
     {
         App.cargarVentana("confirmarSalir");
-        Stage ventana = (Stage) this.exitInicio.getScene().getWindow(); //cerrar ventana 
-        ventana.close();
     }
 
 /******************************************************************************/       
