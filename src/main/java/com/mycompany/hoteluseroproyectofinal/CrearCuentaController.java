@@ -39,7 +39,7 @@ public class CrearCuentaController implements Initializable
     @FXML             // Apellidos usuario
     private TextField cApellidosUser;
     @FXML           // NIF / DNI
-    private Button cnif;
+    private TextField cnif;
     @FXML             // email usuario
     private TextField cEmail;
     @FXML             // numero usuario

@@ -29,10 +29,10 @@
       <TextField fx:id="cNombreUser" layoutX="254.0" layoutY="67.0" promptText="Nombre" />
       <TextField fx:id="cApellidosUser" layoutX="254.0" layoutY="103.0" promptText="Apellidos" />
       <TextField fx:id="cEmail" layoutX="255.0" layoutY="208.0" promptText="eMail" />
+      <TextField fx:id="cnif" layoutX="255.0" layoutY="141.0" promptText="NIF" />
       <TextField fx:id="cNumeroTLF" layoutX="254.0" layoutY="175.0" promptText="Numero telefono" />
       <TextField fx:id="cSexo" layoutX="255.0" layoutY="242.0" promptText="Sexo" />
       <Button fx:id="btCrearCrearCuenta" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear cuenta" />
       <Button fx:id="btVolverInicioCrear" layoutX="33.0" layoutY="208.0" mnemonicParsing="false" onAction="#volverInicioSe" text="Volver atras " />
-      <TextField fx:id="cnif" layoutX="255.0" layoutY="141.0" promptText="NIF" />
    </children>
 </AnchorPane>

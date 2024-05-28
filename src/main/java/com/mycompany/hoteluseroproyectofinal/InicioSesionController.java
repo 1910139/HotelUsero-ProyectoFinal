@@ -37,7 +37,7 @@ public class InicioSesionController implements Initializable
     @FXML
     private CheckBox mostrarPass;
     @FXML           //menu para crear cuenta
-    private Button btcrearCuentaN;
+    private Button btcrearCuenta;
     @FXML           //Inicia sesion
     private Button btiniciarSesion;
     @FXML           //ayuda
@@ -93,16 +93,26 @@ public class InicioSesionController implements Initializable
     }
     
     
-/******************************************************************************/    
+/******************************************************************************/
+//ir al menu de crear cuenta    
     @FXML
-    private void crearCuentaN(ActionEvent event) throws IOException 
+    private void crearCuenta(ActionEvent event) throws IOException 
     {
-    App.cargarVentana("crearCuenta");
-    Stage ventana = (Stage) this.btcrearCuentaN.getScene().getWindow(); //cerrar ventana 
-    ventana.close();
+        App.cargarVentana("crearCuenta");
+        Stage ventana = (Stage) this.btcrearCuenta.getScene().getWindow(); //cerrar ventana 
+        ventana.close();
+    }
+    
+    
+    //salir
+    @FXML
+    private void actionSalir(ActionEvent event) throws IOException 
+    {
+        App.cargarVentana("confirmarSalir");
+        Stage ventana = (Stage) this.exitInicio.getScene().getWindow(); //cerrar ventana 
+        ventana.close();
     }
 
-    
 /******************************************************************************/       
     //hace una consulta en la base de datos para enviarsela al if de comprobar usuario
     private boolean validarCredenciales(String user, String pass) 
