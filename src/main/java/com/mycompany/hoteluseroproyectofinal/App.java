@@ -2,6 +2,7 @@ package com.mycompany.hoteluseroproyectofinal;
 
 import Clases.Cliente;
 import Clases.Empleado;
+import Clases.Habitacion;
 import Clases.Persona;
 //import java.io.File;
 import javafx.application.Application;
@@ -17,6 +18,10 @@ import javafx.event.EventHandler;
 import javafx.stage.Modality;
 import javafx.stage.WindowEvent;
 
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Calendar; //java //date --> sql
 /**
  * JavaFX App
  */
@@ -37,8 +42,28 @@ public class App extends Application
     
     //Lanzador
 /*******************************************************************************/
-    public static void main(String[] args)
+    public static void main(String[] args)      //cambiar sexo a otro parametro
     {
+        // Insertar cliente en la base de datos
+//        Cliente cliente = new Cliente("user1", "password1", "12345678A", "001", "Juan", "Pérez", "juan.perez@example.com", "600123456", true, 1, 10.0f);
+//        ClienteDAO clienteDAO = new ClienteDAO();
+//        clienteDAO.insertarCliente(cliente);
+//
+//        // Insertar empleado en la base de datos
+//        Empleado empleado = new Empleado("user2", "password2", "87654321B", "002", "María", "Gómez", "maria.gomez@example.com", "600654321", false, "E001", 2, "Recepcionista");
+//        EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+//        empleadoDAO.insertarEmpleado(empleado);
+//
+//        // Insertar habitacion en la base de datos
+//        Calendar inicioOcupacion = Calendar.getInstance();
+//        Calendar finOcupacion = Calendar.getInstance();
+//        finOcupacion.add(Calendar.DAY_OF_MONTH, 7);  // Fin de ocupación una semana después
+//
+//        Habitacion habitacion = new Habitacion(1, 101, 1, 2, false, inicioOcupacion, finOcupacion);
+//        HabitacionDAO habitacionDAO = new HabitacionDAO();
+//        habitacionDAO.insertarHabitacion(habitacion);
+
+        // Lanzar aplicación JavaFX
         launch();
     }
 /*******************************************************************************/
@@ -101,8 +126,8 @@ public class App extends Application
     public void setPersona(ArrayList<Persona> personas)
     {
         this.persona = personas;
-    }
-    
+    }   
+}   
 //    //Obtenemos el valor de la ArrayList Personas guardado en el fichero 
 //    public static File getPersonas()
 //    {
@@ -115,7 +140,7 @@ public class App extends Application
 //        this.personas = personas;
 //    }
 
-}
+//}
 
 //    @Override
 //    public void start(Stage stage) throws IOException {

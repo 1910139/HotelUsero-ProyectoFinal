@@ -10,26 +10,23 @@ import java.io.Serializable;
  *
  * @author franc
  */
-public class Empleado extends Persona implements Serializable
-{
+
+public class Empleado extends Persona implements Serializable {
     private String rol;
-    
-    // Añadimos los atributos de la clase persona
+
+    // Constructor
     public Empleado(String user, String pass, String nif, String cod, String nombre, String apellidos, 
-  /*{*/             String email, String tlf, Boolean sexo, String cod_Empleado, int nivel_Empleado, String rol) 
-    {
-        // Llamamos al constructor de la clase Persona
+                    String email, String tlf, Boolean sexo, String cod_Empleado, int nivel_Empleado, String rol) {
         super(user, pass, nif, cod, nombre, apellidos, email, tlf, sexo);
         this.rol = rol;
     }
 
-    public String getRol() 
-    {
+    // Getters y Setters
+    public String getRol() {
         return rol;
     }
 
-    public void setRol(String rol) 
-    {
+    public void setRol(String rol) {
         this.rol = rol;
     }
 }

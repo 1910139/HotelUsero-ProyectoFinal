@@ -4,15 +4,22 @@
  */
 package com.mycompany.hoteluseroproyectofinal;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -37,6 +44,8 @@ public class InicioSesionController implements Initializable
     private Button helpInicio;
     @FXML           // Cerrar programa
     private Button exitInicio;
+    @FXML             // numero usuario
+    private TextField avisos;
 
     /**
      * Initializes the controller class.
@@ -47,27 +56,31 @@ public class InicioSesionController implements Initializable
         // TODO
     }
 
+    
+    
+/*******************************************************************************/
+        //Inicio de sesion prueba base de datos
     @FXML
-    private void iniciarSesion(ActionEvent event) throws IOException
-    {   // Inplementar inicio de sesion
-        
-//     FXMLLoader fxmlloader=new FXMLLoader(App.class.getResource("MenuCliente.fxml"));
-//     Scene scene=new Scene(fxmlloader.load());  
-//     
-//     Stage stage=new Stage();  
-//     stage.setScene(scene);
-//    
-//     //Inhabilitar la ventana actual
-//     stage.initModality(Modality.APPLICATION_MODAL);
-//     stage.show();     
-     
-     App.cargarVentana("MenuCliente");
-     
-    }
-/******************************************************************************/  
+    private void iniciarSesion(ActionEvent event) throws IOException 
+    {
+        //declaramos user y pass
+        String user = userName.getText();
+        String pass = userPass.getText(); 
 
+        //llamamos a validarCredenciales ... si son correctos inicia sesion si son invalidos no
+        if (validarCredenciales(user, pass)) 
+        {
+            App.cargarVentana("menuCliente"); // Abrir ventana
+            Stage ventana = (Stage) this.btiniciarSesion.getScene().getWindow();
+            ventana.close(); // Cerrar ventana
+        } else {    //muestra un mensaje de credenciales invalidos
+            avisos.setText("Credenciales incorrectas"); // Establecer mensaje en el TextField
+            System.out.println("Credenciales incorrectas");
+        }
+    }
+/*******************************************************************************/    
     @FXML
-    private void crearCuenta(ActionEvent event) throws IOException
+    private void crearCuentaNueva(ActionEvent event) throws IOException
     {
  
 //     FXMLLoader fxmlloader=new FXMLLoader(App.class.getResource("CreacionCuenta.fxml"));
@@ -80,9 +93,37 @@ public class InicioSesionController implements Initializable
 //     stage.initModality(Modality.APPLICATION_MODAL);
 //     stage.show();    
      
-     App.cargarVentana("CreacionCuenta");
+     App.cargarVentana("crearCuenta");
+     Stage ventana = (Stage) this.btcrearCuenta.getScene().getWindow(); //cerrar ventana 
+     ventana.close();
 
-    }       
+    }  
+/*******************************************************************************/       
+    //hace una consulta en la base de datos para enviarsela al if de comprobar usuario
+    private boolean validarCredenciales(String user, String pass) 
+    {
+        String query = "SELECT * FROM persona WHERE user = ? AND Pass = ?";
+        
+        
+        //defensa anti SQL Inyection  "or'1'='1
+        try (Connection connection = DatabaseConnection.getConnection();
+                
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) 
+        {
+            preparedStatement.setString(1, user);
+            preparedStatement.setString(2, pass);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+/******************************************************************************/  
+
+         
 }
 
 

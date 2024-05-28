@@ -28,7 +28,8 @@
       </ImageView>
       <Button fx:id="helpInicio" layoutX="41.0" layoutY="346.0" mnemonicParsing="false" text="Ayuda" />
       <Button fx:id="btiniciarSesion" layoutX="175.0" layoutY="226.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar" />
-      <Button fx:id="btcrearCuenta" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crera cuentra" />
+      <Button fx:id="btcrearCuenta" layoutX="66.0" layoutY="226.0" mnemonicParsing="false" onAction="#crearCuentaNueva" text="Crera cuentra" />
       <CheckBox fx:id="mostrarPass" layoutX="66.0" layoutY="200.0" mnemonicParsing="false" text="Mostar Contraseña" />
+      <TextField fx:id="avisos" layoutX="66.0" layoutY="304.0" prefHeight="25.0" prefWidth="397.0" promptText="avisos" />
    </children>
 </AnchorPane>

@@ -4,13 +4,16 @@
  */
 package com.mycompany.hoteluseroproyectofinal;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,6 +42,12 @@ public class CrearCuentaController implements Initializable
     private Button exitC;
     @FXML
     private Button helpCreacioC;
+    @FXML
+    private Button btCrearCrearCuenta;
+    @FXML
+    private Button btVolverInicioCrear;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -49,4 +58,11 @@ public class CrearCuentaController implements Initializable
         // TODO
     }    
     
+     private void volverInicioSe(ActionEvent event) throws IOException
+     {
+  
+     App.cargarVentana("inicioSesion");
+     Stage ventana = (Stage) this.btVolverInicioCrear.getScene().getWindow(); //cerrar ventana 
+     ventana.close();
+     }
 }
