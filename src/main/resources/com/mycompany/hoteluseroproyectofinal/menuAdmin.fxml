@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.MenuAdminController">
+   <children>
+      <TextField fx:id="adUserActivo" layoutX="183.0" layoutY="150.0" prefHeight="25.0" prefWidth="91.0" promptText="Usuario activo" />
+      <Label layoutX="100.0" layoutY="154.0" text="Usuario activo" />
+      <MenuBar layoutX="4.0" layoutY="14.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Gestion Usuarios">
+            <items>
+              <MenuItem fx:id="adAdduser" mnemonicParsing="false" text="Añadir Usuario" />
+                  <MenuItem fx:id="adDeleteUser" mnemonicParsing="false" text="Eliminar Usuario" />
+                  <MenuItem fx:id="adModUser" mnemonicParsing="false" text="Modificar Usuario" />
+                  <MenuItem fx:id="adDatUser" mnemonicParsing="false" text="Datos Usuario" />
+                  <MenuItem fx:id="adListUser" mnemonicParsing="false" text="Listar Usuarios" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Gestion Hotel">
+            <items>
+                  <MenuItem fx:id="adAddRoom" mnemonicParsing="false" text="Añadir habitacion" />
+                  <MenuItem fx:id="adDeleteRoom" mnemonicParsing="false" text="Eliminar habitacion" />
+              <MenuItem fx:id="adListRoomFree" mnemonicParsing="false" text="Ver habitaciones disponibles" />
+                  <MenuItem fx:id="adListRoomOcupa" mnemonicParsing="false" text="Ver habitaciones ocupadas" />
+                  <MenuItem fx:id="adDatRoom" mnemonicParsing="false" text="Modificar datos habitacion" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Utilidades">
+            <items>
+              <MenuItem fx:id="adCalculadora" mnemonicParsing="false" text="Calculadora" />
+                  <MenuItem fx:id="adAgenda" mnemonicParsing="false" text="Agenda" />
+                  <MenuItem fx:id="adCalendario" mnemonicParsing="false" text="Calendario" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="exitA" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#actionSalir" text="Salir" />
+   </children>
+</AnchorPane>
+

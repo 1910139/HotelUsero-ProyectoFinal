@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.AdAñadirUsuarioController">
+   <children>
+      <Label layoutX="25.0" layoutY="26.0" text="Crear cuenta gran hotel El Usero">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="cNUser" layoutX="25.0" layoutY="67.0" promptText="Nombre usuario" />
+      <PasswordField fx:id="cContrasena" layoutX="25.0" layoutY="103.0" promptText="Contraseña" />
+      <PasswordField fx:id="cCContrasena" layoutX="25.0" layoutY="141.0" promptText="Confirmar contraseña" />
+      <ImageView fitHeight="108.0" fitWidth="110.0" layoutX="478.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../ProyectoHotel/src/main/java/IMG/logo%20hotel.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitC" layoutX="547.0" layoutY="361.0" mnemonicParsing="false" onAction="#actionSalir" text="Salir" />
+      <Button fx:id="helpCreacioC" layoutX="478.0" layoutY="361.0" mnemonicParsing="false" text="Ayuda" />
+      <TextField fx:id="cNombreUser" layoutX="254.0" layoutY="67.0" promptText="Nombre" />
+      <TextField fx:id="cApellidosUser" layoutX="254.0" layoutY="103.0" promptText="Apellidos" />
+      <TextField fx:id="cEmail" layoutX="254.0" layoutY="208.0" promptText="eMail" />
+      <TextField fx:id="cnif" layoutX="255.0" layoutY="141.0" promptText="NIF" />
+      <TextField fx:id="cNumeroTLF" layoutX="254.0" layoutY="241.0" promptText="Numero telefono" />
+      <TextField fx:id="cSexo" layoutX="254.0" layoutY="275.0" promptText="Sexo" />
+      <Button fx:id="btCrearCrearCuenta" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear cuenta" />
+      <Button fx:id="btVolverInicioCrear" layoutX="25.0" layoutY="208.0" mnemonicParsing="false" onAction="#volverInicioSe" text="Volver atras " />
+      <TextField fx:id="cRol" layoutX="254.0" layoutY="175.0" promptText="Rol" />
+      <TextField fx:id="cNiveluser" layoutX="429.0" layoutY="208.0" promptText="nivel cliente" />
+      <TextField fx:id="cDescuentoUser" layoutX="429.0" layoutY="241.0" promptText="descuento cliente" />
+      <Label layoutX="468.0" layoutY="179.0" prefHeight="17.0" prefWidth="71.0" text="Para cliente" />
+   </children>
+</AnchorPane>

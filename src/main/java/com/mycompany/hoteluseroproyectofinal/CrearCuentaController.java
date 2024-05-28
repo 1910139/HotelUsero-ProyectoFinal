@@ -69,6 +69,7 @@ public class CrearCuentaController implements Initializable
     @FXML
     private void crearCuenta(ActionEvent event) throws IOException 
     {
+        
         String user = cNUser.getText();
         String pass = cContrasena.getText();
         String confirmarPass = cCContrasena.getText();
@@ -78,7 +79,12 @@ public class CrearCuentaController implements Initializable
         String email = cEmail.getText();
         String numeroTLF = cNumeroTLF.getText();
         String sexo = cSexo.getText();
-
+        
+        if (user.isEmpty() || pass.isEmpty()) 
+        {
+            mostrarAlerta("Error", "Todos los campos son obligatorios.", Alert.AlertType.ERROR);
+            return;
+        }
         System.out.println("Datos recibidos: " + user + ", " + pass + ", " + confirmarPass);
 
         if (!usuarioExiste(user)) 
@@ -86,7 +92,9 @@ public class CrearCuentaController implements Initializable
             if (pass.equals(confirmarPass)) 
             {
                 insertarUsuario(user, pass, nombre, apellidos, nif, email, numeroTLF, sexo);
-                // Si se desea, se puede redirigir a otra ventana (por ejemplo, la ventana de inicio de sesión) aquí
+                App.cargarVentana("inicioSesion");
+                Stage ventana = (Stage) this.btCrearCrearCuenta.getScene().getWindow();
+                ventana.close();
             } else {
                 mostrarAlerta("Error", "Las contraseñas no coinciden", Alert.AlertType.ERROR);
             }

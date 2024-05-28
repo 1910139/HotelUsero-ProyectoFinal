@@ -38,10 +38,10 @@
       </MenuBar>
       <ImageView fitHeight="110.0" fitWidth="116.0" layoutX="476.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../ProyectoHotel/src/main/java/IMG/logo%20hotel.jpg" />
+            <Image url="@../../../../java/IMG/logo%20hotel.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="exitMCliente" layoutX="547.0" layoutY="361.0" mnemonicParsing="false" text="Salir" />
+      <Button fx:id="exitMCliente" layoutX="547.0" layoutY="361.0" mnemonicParsing="false" onAction="#actionSalir" text="Salir" />
       <Label layoutX="26.0" layoutY="365.0" text="Hola ;)" />
       <TextField fx:id="userActivo" layoutX="67.0" layoutY="361.0" />
       <Button fx:id="helpMCliente" layoutX="476.0" layoutY="361.0" mnemonicParsing="false" text="Ayuda" />

@@ -76,20 +76,64 @@ public class InicioSesionController implements Initializable
     @FXML
     private void iniciarSesion(ActionEvent event) throws IOException 
     {
-        //declaramos user y pass
         String user = userName.getText();
         String pass = userPass.getText(); 
 
-        //llamamos a validarCredenciales ... si son correctos inicia sesion si son invalidos no
         if (validarCredenciales(user, pass)) 
         {
-            App.cargarVentana("menuCliente"); // Abrir ventana
+            String rol = obtenerRolUsuario(user);
+            switch (rol.toLowerCase()) 
+            {
+                case "cliente":
+                    App.cargarVentana("menuCliente");
+                    break;
+                case "empleado":
+                    App.cargarVentana("menuEmpleado");
+                    break;
+                case "administrador":
+                    App.cargarVentana("menuAdmin");
+                    break;
+                default:
+                    avisos.setText("Tipo de usuario desconocido");
+                    System.out.println("Tipo de usuario desconocido");
+                    break;
+            }
             Stage ventana = (Stage) this.btiniciarSesion.getScene().getWindow();
-            ventana.close(); // Cerrar ventana
-        } else {    //muestra un mensaje de credenciales invalidos
-            avisos.setText("Credenciales incorrectas"); // Establecer mensaje en el TextField
+            ventana.close();
+        } else {
+            avisos.setText("Credenciales incorrectas");
             System.out.println("Credenciales incorrectas");
         }
+    }
+   
+    private String obtenerRolUsuario(String user) 
+    {
+        String personaQuery = "SELECT rol FROM persona WHERE user = ?";
+        String adminQuery = "SELECT 'administrador' AS rol FROM administrador WHERE nombre = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+      /*{*/  PreparedStatement personaStatement = connection.prepareStatement(personaQuery);
+      /*{*/  PreparedStatement adminStatement = connection.prepareStatement(adminQuery)) 
+        {
+
+            // Comprobación en la tabla Persona (cliente o empleado)
+            personaStatement.setString(1, user);
+            ResultSet personaResultSet = personaStatement.executeQuery();
+            if (personaResultSet.next()) 
+            {
+                return personaResultSet.getString("rol");
+            }
+
+            // Comprobación en la tabla Administrador
+            adminStatement.setString(1, user);
+            ResultSet adminResultSet = adminStatement.executeQuery();
+            if (adminResultSet.next()) 
+            {
+                return adminResultSet.getString("rol");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "desconocido";
     }
     
     
@@ -115,24 +159,44 @@ public class InicioSesionController implements Initializable
     //hace una consulta en la base de datos para enviarsela al if de comprobar usuario
     private boolean validarCredenciales(String user, String pass) 
     {
-//      String query = "SELECT * FROM users WHERE username = '" + user + "' AND password = '" + pass + "'";
-        String query = "SELECT * FROM persona WHERE user = ? AND pass = ?";
+    String personaQuery = "SELECT * FROM Persona WHERE user = ? AND pass = ?";
+    String adminQuery = "SELECT * FROM Administrador WHERE nombre = ? AND pass = ?";
+    
+    try (Connection connection = DatabaseConnection.getConnection();  
+  /*{*/  PreparedStatement personaStatement = connection.prepareStatement(personaQuery);
+  /*{*/  PreparedStatement adminStatement = connection.prepareStatement(adminQuery)) 
+    {
         
-        
-        //defensa anti SQL Inyection  "or'1'='1"
-        try (Connection connection = DatabaseConnection.getConnection();  
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) 
+        // Comprobación en la tabla Persona (cliente o empleado)
+        personaStatement.setString(1, user);
+        personaStatement.setString(2, pass);
+        ResultSet personaResultSet = personaStatement.executeQuery();
+        if (personaResultSet.next()) 
         {
-            preparedStatement.setString(1, user);
-            preparedStatement.setString(2, pass);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            return resultSet.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            String rol = personaResultSet.getString("rol");
+            if (rol.equalsIgnoreCase("cliente")) 
+            {
+                return true; // Cliente
+            } else if (rol.equalsIgnoreCase("empleado")) {
+                // Hacer algo para manejar el inicio de sesión de un empleado
+                return true; // Suponiendo que también se inicia sesión para un empleado
+            }
         }
-        return false;
+        
+        // Comprobación en la tabla Administrador
+        adminStatement.setString(1, user);
+        adminStatement.setString(2, pass);
+        ResultSet adminResultSet = adminStatement.executeQuery();
+        if (adminResultSet.next()) {
+            // Hacer algo para manejar el inicio de sesión de un administrador
+            return true; // Suponiendo que también se inicia sesión para un administrador
+        }
+        
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return false;
     }
 /******************************************************************************/         
 }
