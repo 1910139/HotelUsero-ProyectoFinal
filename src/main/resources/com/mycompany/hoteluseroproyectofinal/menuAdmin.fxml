@@ -16,7 +16,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="Gestion Usuarios">
             <items>
-              <MenuItem fx:id="adAdduser" mnemonicParsing="false" text="Añadir Usuario" />
+              <MenuItem fx:id="adAddClient" mnemonicParsing="false" onAction="#adCrearCuentaCliente" text="Añadir Cliente" />
+                  <MenuItem fx:id="adAddCuentaEmpleado" mnemonicParsing="false" onAction="#adCrearCuentaEmpleado" text="Añadir Empleado" />
                   <MenuItem fx:id="adDeleteUser" mnemonicParsing="false" text="Eliminar Usuario" />
                   <MenuItem fx:id="adModUser" mnemonicParsing="false" text="Modificar Usuario" />
                   <MenuItem fx:id="adDatUser" mnemonicParsing="false" text="Datos Usuario" />
@@ -44,4 +45,3 @@
       <Button fx:id="exitA" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" onAction="#actionSalir" text="Salir" />
    </children>
 </AnchorPane>
-

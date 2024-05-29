@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author franc
  */
-public class AdAñadirUsuarioController implements Initializable 
+public class AdAñadirClienteController implements Initializable 
 {
 
     @FXML
@@ -81,18 +81,14 @@ public class AdAñadirUsuarioController implements Initializable
     void actionSalir(ActionEvent event) throws IOException 
     {
         App.cargarVentana("confirmarSalir");
-    }
-
-    @FXML
-    void crearCuenta(ActionEvent event) throws IOException 
-    {
-        
+        Stage ventana = (Stage) this.exitC.getScene().getWindow(); //cerrar ventana 
+        ventana.close();
     }
 
     @FXML
     void volverInicioSe(ActionEvent event) throws IOException 
     {
-        App.cargarVentana("inicioSesion");
+        App.cargarVentana("menuAdmin");
         Stage ventana = (Stage) this.btVolverInicioCrear.getScene().getWindow(); //cerrar ventana 
         ventana.close();
     }
@@ -107,7 +103,8 @@ public class AdAñadirUsuarioController implements Initializable
     
     
     @FXML
-    private void adcrearCuenta(ActionEvent event) throws IOException {
+    private void adCrearCuentaCCliente(ActionEvent event) throws IOException 
+    {
         String user = cNUser.getText();
         String pass = cContrasena.getText();
         String confirmarPass = cCContrasena.getText();
@@ -117,35 +114,61 @@ public class AdAñadirUsuarioController implements Initializable
         String email = cEmail.getText();
         String numeroTLF = cNumeroTLF.getText();
         String sexo = cSexo.getText();
-        String rol = cRol.getText();
-        int nivelCliente = Integer.parseInt(cNiveluser.getText());
-        float descuentoCliente = Float.parseFloat(cDescuentoUser.getText());
-        
-        if (user.isEmpty() || pass.isEmpty()) {
+        String rol = "Cliente"; // Se asume que se está añadiendo un cliente
+
+        int nivelCliente;
+        float descuentoCliente;
+
+        try 
+        {
+            nivelCliente = Integer.parseInt(cNiveluser.getText());
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error", "El nivel del usuario debe ser un número válido.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try 
+        {
+            descuentoCliente = Float.parseFloat(cDescuentoUser.getText());
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error", "El descuento del cliente debe ser un número válido.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Verificar campos vacíos
+        if (user.isEmpty() || pass.isEmpty() || confirmarPass.isEmpty() || nombre.isEmpty() || apellidos.isEmpty() ||
+                nif.isEmpty() || email.isEmpty() || numeroTLF.isEmpty() || sexo.isEmpty() || cNiveluser.getText().isEmpty() || cDescuentoUser.getText().isEmpty()) 
+        {
             mostrarAlerta("Error", "Todos los campos son obligatorios.", Alert.AlertType.ERROR);
             return;
         }
 
-        if (!usuarioExiste(user)) {
-            if (pass.equals(confirmarPass)) {
-                insertarUsuario(user, pass, nombre, apellidos, nif, email, numeroTLF, sexo, rol, nivelCliente, descuentoCliente);
-                App.cargarVentana("inicioSesion");
-                Stage ventana = (Stage) this.btCrearCrearCuenta.getScene().getWindow();
-                ventana.close();
-            } else {
-                mostrarAlerta("Error", "Las contraseñas no coinciden", Alert.AlertType.ERROR);
+        // Verificar si el usuario ya existe
+        if (!usuarioExiste(user)) 
+        {
+            // Verificar si las contraseñas coinciden
+            if (pass.equals(confirmarPass)) 
+            {
+                insertarCliente(user, pass, nombre, apellidos, nif, email, numeroTLF, sexo, rol, nivelCliente, descuentoCliente);
+            } else 
+            {
+                mostrarAlerta("Error", "Las contraseñas no coinciden.", Alert.AlertType.ERROR);
             }
-        } else {
-            mostrarAlerta("Error", "El nombre de usuario ya está en uso", Alert.AlertType.ERROR);
+        } else 
+        {
+            mostrarAlerta("Error", "El nombre de usuario ya está en uso.", Alert.AlertType.ERROR);
         }
     }
 
-    private boolean usuarioExiste(String user) {
+    private boolean usuarioExiste(String user) 
+    {
         String query = "SELECT * FROM Persona WHERE user = ?";
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) 
+        {
             preparedStatement.setString(1, user);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) 
+            {
                 return resultSet.next(); // Devuelve true si encuentra alguna coincidencia
             }
         } catch (SQLException e) {
@@ -154,10 +177,13 @@ public class AdAñadirUsuarioController implements Initializable
         }
     }
 
-    private void insertarUsuario(String user, String pass, String nombre, String apellidos, String nif, String email, String numeroTLF, String sexo, String rol, int nivelCliente, float descuentoCliente) {
+    private void insertarCliente(String user, String pass, String nombre, String apellidos, String nif,
+                                 String email, String numeroTLF, String sexo, String rol, int nivelCliente, float descuentoCliente) 
+    {
         String query = "INSERT INTO Persona (user, pass, nif, nombre, apellidos, email, tlf, sexo, rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) 
+        {
             preparedStatement.setString(1, user);
             preparedStatement.setString(2, pass);
             preparedStatement.setString(3, nif);
@@ -169,38 +195,46 @@ public class AdAñadirUsuarioController implements Initializable
             preparedStatement.setString(9, rol);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("No se pudo insertar el usuario");
+                throw new SQLException("No se pudo insertar el usuario.");
             }
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) 
+            {
                 if (generatedKeys.next()) {
                     int userId = generatedKeys.getInt(1);
-                    insertarCliente(userId, nivelCliente, descuentoCliente); // Insertar cliente después de insertar la persona
+                    insertarClienteDetalle(userId, nivelCliente, descuentoCliente); // Insertar cliente después de insertar la persona
+                    mostrarAlerta("Éxito", "Usuario creado correctamente.", Alert.AlertType.INFORMATION);
                 } else {
-                    throw new SQLException("No se pudo obtener el ID generado del usuario");
+                    throw new SQLException("No se pudo obtener el ID generado del usuario.");
                 }
             }
-            mostrarAlerta("Éxito", "Usuario creado correctamente", Alert.AlertType.INFORMATION);
         } catch (SQLException e) {
             e.printStackTrace();
-            mostrarAlerta("Error", "No se pudo crear el usuario", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", "No se pudo crear el usuario.", Alert.AlertType.ERROR);
         }
     }
 
-    private void insertarCliente(int userId, int nivelCliente, float descuentoCliente) {
+    private void insertarClienteDetalle(int userId, int nivelCliente, float descuentoCliente) 
+    {
         String query = "INSERT INTO Cliente (id, nivel_cliente, descuento) VALUES (?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) 
+        {
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, nivelCliente);
             preparedStatement.setFloat(3, descuentoCliente);
-            preparedStatement.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) 
+            {
+                throw new SQLException("No se pudo insertar el cliente.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Manejar errores de inserción del cliente si es necesario
+            mostrarAlerta("Error", "No se pudo crear el cliente.", Alert.AlertType.ERROR);
         }
     }
 
-    private void mostrarAlerta(String titulo, String contenido, Alert.AlertType tipo) {
+    private void mostrarAlerta(String titulo, String contenido, Alert.AlertType tipo) 
+    {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
         alerta.setContentText(contenido);

@@ -23,13 +23,13 @@ public class MenuAdminController implements Initializable
 {
 
     @FXML
-    private MenuItem adDatUser;
+    private MenuItem adAddClient;
+
+    @FXML
+    private MenuItem adAddCuentaEmpleado;
 
     @FXML
     private MenuItem adAddRoom;
-
-    @FXML
-    private MenuItem adAdduser;
 
     @FXML
     private MenuItem adAgenda;
@@ -42,6 +42,9 @@ public class MenuAdminController implements Initializable
 
     @FXML
     private MenuItem adDatRoom;
+
+    @FXML
+    private MenuItem adDatUser;
 
     @FXML
     private MenuItem adDeleteRoom;
@@ -63,10 +66,9 @@ public class MenuAdminController implements Initializable
 
     @FXML
     private TextField adUserActivo;
-    
+
     @FXML
     private Button exitA;
-
 
     /**
      * Initializes the controller class.
@@ -84,10 +86,16 @@ public class MenuAdminController implements Initializable
         App.cargarVentana("confirmarSalir");
     }
     
-//    @FXML   //Indica el nombre del usuario activo
-//    public void establecerNombreAdmin(String nombreUsuario) 
-//    {
-//    adUserActivo.setText(nombreUsuario);
-//    }
+    @FXML
+    private void adCrearCuentaCliente(ActionEvent event) throws IOException 
+    {
+        App.cargarVentana("adAñadirCliente");
+    }
+    
+    @FXML
+    private void adCrearCuentaEmpleado(ActionEvent event) throws IOException 
+    {
+       App.cargarVentana("adAñadirEmpleado");
+    }
     
 }

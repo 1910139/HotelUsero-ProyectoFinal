@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.AdAñadirUsuarioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.hoteluseroproyectofinal.AdAñadirClienteController">
    <children>
       <Label layoutX="25.0" layoutY="26.0" text="Crear cuenta gran hotel El Usero">
          <font>
@@ -32,7 +32,7 @@
       <TextField fx:id="cnif" layoutX="255.0" layoutY="141.0" promptText="NIF" />
       <TextField fx:id="cNumeroTLF" layoutX="254.0" layoutY="241.0" promptText="Numero telefono" />
       <TextField fx:id="cSexo" layoutX="254.0" layoutY="275.0" promptText="Sexo" />
-      <Button fx:id="btCrearCrearCuenta" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear cuenta" />
+      <Button fx:id="btCrearCrearCuenta" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" onAction="#adCrearCuentaCCliente" text="Crear cuenta" />
       <Button fx:id="btVolverInicioCrear" layoutX="25.0" layoutY="208.0" mnemonicParsing="false" onAction="#volverInicioSe" text="Volver atras " />
       <TextField fx:id="cRol" layoutX="254.0" layoutY="175.0" promptText="Rol" />
       <TextField fx:id="cNiveluser" layoutX="429.0" layoutY="208.0" promptText="nivel cliente" />
